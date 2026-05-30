@@ -250,6 +250,34 @@ img { max-width: 100%; display: block; }
 
 /* ============== SECTION SHELL ============== */
 .section { padding: 6rem 0; position: relative; }
+
+/* Stronger section division: alternating warm bg + top accent line */
+#about,
+#projects {
+  background: var(--bg-page);
+}
+#skills,
+#contact {
+  background: var(--bg-elev);
+}
+.section[style*="padding: 9px"] {
+  padding: 5.5rem 0 5.5rem !important;
+}
+.section + .section { border-top: 1px solid var(--border-soft); }
+.section::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 56px;
+  height: 3px;
+  background: var(--teal);
+  border-radius: 0 0 4px 4px;
+  opacity: 0.85;
+}
+#contact::before { background: var(--amber); }
+#projects::before { background: var(--amber); }
 .section-header {
   max-width: 720px;
   margin: 0 auto 4rem;
@@ -452,8 +480,8 @@ img { max-width: 100%; display: block; }
 /* ============== PROJECTS ============== */
 .projects-grid {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 1.5rem;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1.75rem;
 }
 .project-card {
   background: var(--bg-card);
@@ -510,6 +538,20 @@ img { max-width: 100%; display: block; }
   transition: transform 0.35s ease;
 }
 .project-card:hover .project-thumb i { transform: scale(1.08) rotate(-3deg); }
+
+.project-thumb img.project-thumb-img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: top center;
+  z-index: 0;
+  transition: transform 0.45s ease;
+}
+.project-card:hover .project-thumb-img { transform: scale(1.04); }
+.project-thumb.has-image::before,
+.project-thumb.has-image::after { display: none; }
 
 .project-thumb-tag {
   position: absolute;
@@ -762,6 +804,75 @@ img { max-width: 100%; display: block; }
 .about-avatar--photo::after { content: none !important; display: none !important; }
 .about-avatar--photo .tag-bl { display: none !important; }
 
+/* ============================================================== */
+/* ADAPTED: rounded bordered section panels (agency component look) */
+/* ============================================================== */
+
+/* page bg shows uniformly behind the floating panels */
+.section { background: transparent !important; }
+.section::before { display: none; }
+.section + .section { border-top: 0; }
+
+/* consistent vertical rhythm so panel gaps are even */
+.hero { padding-bottom: 1.75rem !important; }
+.section { padding-top: 0 !important; padding-bottom: 3.25rem !important; }
+
+/* each section's content becomes a bordered, rounded panel */
+.section > .container {
+  border: 1px solid var(--border);
+  border-radius: 30px;
+  background: var(--bg-card);
+  box-shadow: var(--shadow-md);
+  padding: clamp(2.5rem, 5vw, 4.25rem) clamp(1.5rem, 4vw, 3.5rem);
+  position: relative;
+  overflow: hidden;
+}
+.section > .container::before {
+  content: "";
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 3px;
+  background: linear-gradient(90deg, var(--teal), var(--amber));
+  opacity: 0.85;
+}
+#projects > .container::before,
+#contact  > .container::before {
+  background: linear-gradient(90deg, var(--amber), var(--teal));
+}
+
+/* hero gets a lighter, gradient-tinted framed panel */
+.hero .hero-inner {
+  max-width: 1100px;
+  margin-left: auto !important;
+  margin-right: auto !important;
+  border: 1px solid var(--border);
+  border-radius: 30px;
+  background: linear-gradient(135deg, var(--bg-card) 0%, var(--accent-muted) 140%);
+  box-shadow: var(--shadow-md);
+  padding: clamp(2.75rem, 5.5vw, 4.5rem) clamp(1.75rem, 5vw, 4rem);
+}
+.hero .hero-inner::before {
+  content: "";
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 3px;
+  background: linear-gradient(90deg, var(--teal), var(--amber));
+  opacity: 0.85;
+  border-radius: 30px 30px 0 0;
+}
+
+/* normalise section headers so they sit cleanly inside the panels */
+.section-header {
+  max-width: 720px !important;
+  margin: 0 auto 3.25rem !important;
+}
+.section-header p { white-space: normal !important; }
+
+@media (max-width: 768px) {
+  .section > .container,
+  .hero .hero-inner { border-radius: 22px; }
+}
+
 @media (max-width: 480px) {
   .container { padding: 0 1.1rem; }
   .hero { padding: 3.5rem 0 3rem; }
@@ -794,26 +905,18 @@ img { max-width: 100%; display: block; }
 </nav>
 
 <!-- ========== HERO ========== -->
-<header id="top" class="hero" style="padding: 90px 0px 10px">
+<header id="top" class="hero" style="padding: 10px 0px 28px">
   <div class="container hero-inner" style="margin: 0px 110px">
     <h1 data-aos="fade-up" data-aos-delay="80"><span class="accent" style="color: rgb(28, 25, 23)"><span style="color: #2a7d8c">Operational work is hard enough.</span></span><br><span class="accent-2" style="color: rgb(28, 25, 23)">Your tools shouldn't make it harder.</span></h1>
     <p class="hero-role" data-aos="fade-up" data-aos-delay="140">Panel Service Executive · Screenwise Select Panel ·  London</p>
     <p class="hero-sub" data-aos="fade-up" data-aos-delay="200">I design and build internal tools that make operational work faster and easier. I spot the friction, figure out what's missing, and build something that removes it.</p>
-    <div class="hero-ctas" data-aos="fade-up" data-aos-delay="260">
-      <a href="#projects" class="btn btn-primary">Go to projects</a>
-      <a href="#contact" class="btn btn-ghost">Say Hi</a>
-    </div>
-    <div class="hero-meta" data-aos="fade-up" data-aos-delay="320">
-      <span><i class="fa-solid fa-location-dot"></i> London, UK</span>
-      <span><i class="fa-regular fa-clock"></i> GMT / BST</span>
-    </div>
   </div>
 </header>
 
 <main id="main">
 
   <!-- ========== ABOUT ========== -->
-  <section id="about" class="section" style="padding: 9px 0px 90px">
+  <section id="about" class="section" style="padding: 10px 0px 52px">
     <div class="container">
       <div class="section-header" data-aos="fade-up" style="margin: 0px 182px 64px 110px; max-width: none;">
         <h2>A little background</h2>
@@ -842,7 +945,7 @@ img { max-width: 100%; display: block; }
   </section>
 
   <!-- ========== SKILLS ========== -->
-  <section id="skills" class="section" style="padding: 9px 0px 90px">
+  <section id="skills" class="section" style="padding: 10px 0px 52px">
     <div class="container">
       <div class="section-header" data-aos="fade-up">
         <h2>What I bring to a team</h2>
@@ -894,7 +997,7 @@ img { max-width: 100%; display: block; }
   </section>
 
   <!-- ========== PROJECTS ========== -->
-  <section id="projects" class="section" style="padding: 9px 0px 90px">
+  <section id="projects" class="section" style="padding: 10px 0px 88px">
     <div class="container">
       <div class="section-header" data-aos="fade-up">
         <h2>Tools I've built &amp; shipped</h2>
@@ -903,12 +1006,34 @@ img { max-width: 100%; display: block; }
       <div class="projects-grid">
 
         <article class="project-card" data-aos="fade-up">
-          <div class="project-thumb">
-            <span class="project-thumb-tag"><span class="num">01</span> / dashboard</span>
-            <i class="fa-solid fa-gauge-high"></i>
+          <div class="project-thumb has-image">
+            <span class="project-thumb-tag"><span class="num">01</span> / checklist</span>
+            <img class="project-thumb-img" src="assets/line-test-checklist.png" alt="Line Test Checklist tool — Screenwise PSE Support">
           </div>
           <div class="project-body">
-            <h3>KPI Performance Calculator</h3>
+            <h3>Interactive Checklist</h3>
+            <p>
+              Line Test Checklist for PSE Support — a guided, auto-saving form that turns a
+              5-stage line test into a copy-ready note, so every handover is consistent.
+            </p>
+            <div class="project-tags">
+              <span class="project-tag">Internal tool</span>
+              <span class="project-tag">Ops</span>
+              <span class="project-tag">UX</span>
+            </div>
+            <a class="project-link" href="../13-%20Line%20Test%20Support/index.html">
+              open_project <i class="fa-solid fa-arrow-up-right-from-square"></i>
+            </a>
+          </div>
+        </article>
+
+        <article class="project-card" data-aos="fade-up" data-aos-delay="80">
+          <div class="project-thumb has-image">
+            <span class="project-thumb-tag"><span class="num">02</span> / dashboard</span>
+            <img class="project-thumb-img" src="assets/performance-calc-allocations.png" alt="Allocation Score Calculator — allocation groups with metric targets" style="object-position: top center;">
+          </div>
+          <div class="project-body">
+            <h3>Performance Calculator</h3>
             <p>
               A live calculator that turns weekly panel metrics into a clear performance
               score — so the team always knows where they stand against target.
@@ -918,41 +1043,19 @@ img { max-width: 100%; display: block; }
               <span class="project-tag">JavaScript</span>
               <span class="project-tag">KPIs</span>
             </div>
-            <a class="project-link" href="../9-%20KPI%20Performance/index.html">
+            <a class="project-link" href="../9-KPI-performance/index.html">
               open_project <i class="fa-solid fa-arrow-up-right-from-square"></i>
             </a>
           </div>
         </article>
 
-        <article class="project-card" data-aos="fade-up" data-aos-delay="100">
-          <div class="project-thumb">
-            <span class="project-thumb-tag"><span class="num">02</span> / library</span>
-            <i class="fa-solid fa-envelope-open-text"></i>
-          </div>
-          <div class="project-body">
-            <h3>Screenwise Email Library</h3>
-            <p>
-              A searchable, copy-ready library of response templates that cut handle time
-              and keep the support team's voice consistent across every reply.
-            </p>
-            <div class="project-tags">
-              <span class="project-tag">Internal tool</span>
-              <span class="project-tag">Support ops</span>
-              <span class="project-tag">UX</span>
-            </div>
-            <a class="project-link" href="../8-%20GSW%20Flow/V2/">
-              open_project <i class="fa-solid fa-arrow-up-right-from-square"></i>
-            </a>
-          </div>
-        </article>
-
-        <article class="project-card" data-aos="fade-up" data-aos-delay="200">
-          <div class="project-thumb">
+        <article class="project-card" data-aos="fade-up" data-aos-delay="160">
+          <div class="project-thumb has-image">
             <span class="project-thumb-tag"><span class="num">03</span> / flow</span>
-            <i class="fa-solid fa-diagram-project"></i>
+            <img class="project-thumb-img" src="assets/onboarding-map.png" alt="Onboarding flow map — participant journey from survey submission through compliance" style="object-position: center;">
           </div>
           <div class="project-body">
-            <h3>Onboarding Flow Mapper</h3>
+            <h3>Comms Process Mapping</h3>
             <p>
               Side-by-side visualisation of the participant onboarding journey, used to
               spot drop-off points and align Ops, Engineering, and Research.
@@ -962,7 +1065,29 @@ img { max-width: 100%; display: block; }
               <span class="project-tag">Onboarding</span>
               <span class="project-tag">Cross-functional</span>
             </div>
-            <a class="project-link" href="../7-%20Onboarding%20Mapping/screenwise-onboarding-side-by-side.html">
+            <a class="project-link" href="../7-onboarding-mapping/screenwise-onboarding-side-by-side.html">
+              open_project <i class="fa-solid fa-arrow-up-right-from-square"></i>
+            </a>
+          </div>
+        </article>
+
+        <article class="project-card" data-aos="fade-up" data-aos-delay="240">
+          <div class="project-thumb has-image">
+            <span class="project-thumb-tag"><span class="num">04</span> / visual</span>
+            <img class="project-thumb-img" src="assets/screenwise-points-guide.png" alt="Screenwise Points Guide infographic — monthly points and bonus rewards">
+          </div>
+          <div class="project-body">
+            <h3>Infographics</h3>
+            <p>
+              Visual explainers like the Screenwise Points Guide — turning panel rewards,
+              processes and policies into clear, shareable graphics for participants and stakeholders.
+            </p>
+            <div class="project-tags">
+              <span class="project-tag">Data viz</span>
+              <span class="project-tag">Comms</span>
+              <span class="project-tag">Design</span>
+            </div>
+            <a class="project-link" href="#">
               open_project <i class="fa-solid fa-arrow-up-right-from-square"></i>
             </a>
           </div>
@@ -973,7 +1098,7 @@ img { max-width: 100%; display: block; }
   </section>
 
   <!-- ========== CONTACT ========== -->
-  <section id="contact" class="section" style="padding: 9px 0px 90px">
+  <section id="contact" class="section" style="padding: 10px 0px 88px">
     <div class="container">
       <div class="section-header" data-aos="fade-up" style="max-width: none;">
         <h2>Let's make something work better</h2>
