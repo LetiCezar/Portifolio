@@ -1,97 +1,106 @@
 # CLAUDE.md — Web Portfolio
 
 ## Project Overview
-Personal portfolio for **Leticia Cezar** — Panel Service Executive, Screenwise, London UK.
-Single-page site showcasing her internal tools and operational projects.
+Personal portfolio for **Leticia Cezar** — Operations & Process Improvement, building internal tools (often with AI) that cut admin and make work easier for teams. London, UK.
+Single-page site aimed at **hiring managers** (recruiters skim too). Primary goal: **get them to email Leticia.**
+
+## Direction & Tone
+- **Designed and bold** — confident colour, strong hierarchy, one dominant moment per screen. Deliberately NOT a safe, low-contrast template.
+- **Warm + capable + approachable** — bold visuals balanced by a real photo and human, plain-spoken copy.
+- **Personality thread:** self-taught, loves to learn, driven to help employees *and* the company thrive. AI/tooling is framed as a means to a human end.
+- **Adjectives to convey:** knowledgeable, competent, resourceful — each project should *demonstrate* one, not just claim it.
+- **No invented metrics.** Use honest qualitative outcomes (e.g. "replaced a manual spreadsheet process"). Never fabricate stats.
 
 ## Architecture
-- **One file:** `index.html` — all HTML, CSS, and JavaScript are embedded here
-- **No build tools, no framework, no package.json**
-- **CDN-only dependencies** (no local node_modules or vendor folders)
-- Opens directly in a browser; no local server needed
+- **One file:** `index.html` — all HTML, CSS, and JavaScript embedded.
+- **No build tools, no framework, no package.json.**
+- **CDN-only dependencies.** Opens directly in a browser.
+- Set-and-forget, but kept easy to edit (clear tokens + repeatable case-study pattern).
 
 ## CDN Dependencies
 | Library | Version | Purpose |
 |---|---|---|
-| Google Fonts — Inter | 400–800 | Primary typeface |
-| Font Awesome | 6.5.0 | Icons throughout |
-| AOS (Animate on Scroll) | 2.3.4 | Scroll-triggered entrance animations |
+| Google Fonts — Space Grotesk | 400–700 | Display / headings |
+| Google Fonts — Inter | 400–700 | Body text |
+| Font Awesome | 6.5.0 | Icons |
+
+(Scroll animations use a native `IntersectionObserver` — no animation library/CDN.)
 
 ## Design System
 
-### Colors (CSS custom properties in `:root`)
+### Colours (CSS custom properties in `:root`)
 | Variable | Value | Use |
 |---|---|---|
-| `--accent` | `#75975e` | Sage green accent — buttons, links, highlights |
-| `--accent-dark` | `#4b6043` | Hover state / darker green |
-| `--accent-muted` | `rgba(117, 151, 94, 0.08)` | Subtle tinted backgrounds |
-| `--text-heading` | `#111827` | Section titles, card headings |
-| `--text-body` | `#4B5563` | Body copy |
-| `--text-light` | `#9CA3AF` | Secondary/muted text |
-| `--bg-page` | `#F9FAFB` | Page background (off-white) |
-| `--bg-card` | `#FFFFFF` | Card surfaces |
-| `--border` | `#E5E7EB` | Card/section borders |
+| `--ink` | `#34281f` | Warm soft-brown — headings & text (not pure black) |
+| `--ink-soft` | `#5a4d42` | Body text |
+| `--ink-mute` | `#837467` | Secondary text |
+| `--cream` | `#ffffff` | Clean white page canvas |
+| `--cream-deep` | `#ffe9d4` | Peachy tinted panels (About, footer) |
+| `--paper` | `#ffffff` | Cards |
+| `--coral` | `#ff6a45` | Primary bold accent — bright & happy |
+| `--coral-deep` | `#ed4d28` | Hover / pressed |
+| `--teal` / `--teal-deep` | `#14b8a6` / `#0e9787` | Mint-teal pop — Contact gradient, "Open the tool" buttons, live dot |
+| `--sun` / `--sun-deep` | `#ffc24a` / `#f5a623` | Sunny yellow — KPI banner gradient, Contact `.mark` |
+| `--border` / `--border-soft` | rgba ink | Borders |
+
+**Palette mood:** bright and happy, no large dark surfaces. Coral leads; teal and sun are supporting pops (used where the design previously went ink-black: the KPI featured banner now coral→sun, Contact now teal, footer now peach). Keep it to these three accents — don't add more hues without asking.
 
 ### Typography
-- **Font:** Inter (system fallbacks: Helvetica Neue → Arial → sans-serif)
-- **Base size:** 1rem, line-height 1.7
-- **Hero title:** `clamp(2.8rem, 6vw, 4rem)` — scales with viewport
-- **Section titles:** 2rem, weight 700
+- **Display/headings:** Space Grotesk (700) — gives the bold, designed character.
+- **Body:** Inter. Base 1rem, line-height 1.6.
+- **Hero H1:** `clamp(2.6rem, 5.4vw, 4.2rem)`. One word/phrase highlighted with `.mark` (coral + underline swash).
 
 ### Responsive Breakpoints
-- `≤ 1024px` — tablet (grid collapses)
-- `≤ 768px` — mobile (hamburger nav, single column)
-- `≤ 480px` — small phones (tighter spacing)
+- `≤ 900px` — hero & about stack; case study body goes single-column.
+- `≤ 680px` — hamburger nav, single column, compact case summaries.
+- `≤ 420px` — small-phone spacing.
 
 ## Page Sections (top → bottom)
-1. **Nav** — sticky, glassmorphic blur, active link underline, hamburger on mobile
-2. **Hero** — "Available for collaboration" badge, name/title/subtitle, two CTAs
-3. **About** — "LC" monogram avatar + 4 chip tags + 2-paragraph bio
-4. **Skills** — 4-column card grid: Data & Analysis · Web & Code · Operations · Soft Skills
-5. **Projects** — 3-column card grid with links to real tools (see below)
-6. **Contact** — centered card with email CTA, LinkedIn, GitHub
-7. **Footer** — dark background, copyright
-8. **Back-to-top** — fixed circular button (appears after 300px scroll)
+1. **Nav** — sticky glass blur; links + dark "Get in touch" CTA; hamburger on mobile.
+2. **Hero** — availability pill, bold headline with coral `.mark`, positioning line, Email/See-work CTAs, location + language meta, photo with coral offset block + "Self-taught" float badge.
+3. **About** — `cream-deep` panel; lead line + bio + chips on the left, three trait cards (Knowledgeable / Competent / Resourceful) on the right.
+4. **Work** — expandable case studies (`<details>`). **KPI Calculator is `.featured`** (ink banner, larger) and sits first. Each opens to Problem → Built → Changed + screenshot + "Open the tool" link.
+5. **Contact** — full ink section; coral `.mark` headline; email-copy button (primary) + LinkedIn; social row.
+6. **Footer** — ink, available status + version.
+7. **Back-to-top** — coral rounded button, appears after 320px scroll.
 
-## Project Cards & Paths
-| Card | Relative path |
+## Project Links (relative `href`s)
+| Case | Path |
 |---|---|
-| KPI Performance Calculator | `../9- KPI Performance/index.html` |
-| Screenwise Email Library | `../8- GSW Flow/V2/` |
-| Onboarding Flow Mapper | `../7- Onboarding Mapping/screenwise-onboarding-side-by-side.html` |
+| 01 KPI Performance Calculator (featured) | `../9- KPI Performance/index.html` |
+| 02 Line Test Checklist | `../13- Line Test Support/index.html` |
+| 03 Onboarding Process Map | `../7-onboarding-mapping/screenwise-onboarding-side-by-side.html` |
+| 04 Infographics | `#` (no live tool yet) |
+
+## Assets (in `assets/`)
+`profile.jpeg`, `performance-calc-allocations.png`, `line-test-checklist.png`, `onboarding-map.png`, `screenwise-points-guide.png`.
 
 ## Live Links
 - **Email:** leticiafcezar@gmail.com
 - **LinkedIn:** https://www.linkedin.com/in/leticiafcezar/
-- **GitHub:** https://github.com/LetiCezar
 
 ## How to Extend
 
-### Add a project card
-Copy an existing `.project-card` block in the `#projects` section. Update: icon class, title, description, tag chips, and the `href` on the link button. Use a relative path (`../folder/file.html`) for local tools.
+### Add a case study
+Copy a non-featured `<details class="case reveal">` block in `#work`. Update: `.case-num`, `<h3>`, summary `<p>`, the `.case-tag`s, the three `.story-block`s (The friction / What I built / What changed), the `.case-shot` image, and the `.case-actions` link `href`. Keep collapsed by default (only the featured KPI case has `open`).
+
+### Make a case the featured one
+Add `featured` to its class and a `<span class="featured-flag">…</span>` inside `.case-head`. Only one featured case at a time.
 
 ### Add a profile photo
-Inside `.about-avatar`, replace the `<span>LC</span>` with:
-```html
-<img src="photo.jpg" alt="Leticia Cezar" style="width:100%;height:100%;object-fit:cover;border-radius:50%;">
-```
-Then remove the avatar's background-color and the `font-size`/`font-weight` rules from `.about-avatar`.
-
-### Add a new section
-1. Add a `<section id="new-section" class="section">` block in the HTML
-2. Add a nav link `<a href="#new-section">Label</a>` in the `<nav>`
-3. Follow the existing section pattern: `.container > .section-header > h2 + p`, then content
+Already wired: `.hero-photo-frame img` uses `assets/profile.jpeg`. Swap the file or the `src`.
 
 ## Conventions
-- **Keep everything in `index.html`** — do not split into separate CSS/JS files unless explicitly asked
-- **No new CDNs** without asking first
-- **Mobile-first** — test all layout changes at 375px and 1280px
-- **AOS attributes** — add `data-aos="fade-up"` and `data-aos-delay="N"` to new cards for consistent entrance animation
-- **Always read `index.html` before editing** — the file is the single source of truth
+- **Keep everything in `index.html`** — don't split CSS/JS unless asked.
+- **No new CDNs** without asking first.
+- **Mobile-first** — test every layout change at 375px and 1280px; nothing may overflow.
+- **No inline-style overrides** that fight the CSS (this was the old file's main bug). Style via classes/tokens.
+- **Reveal animation** — add class `reveal` to new blocks; the IntersectionObserver fades them in.
+- **Always read `index.html` before editing** — it is the single source of truth.
 
 ## Do Not Change Without Asking
-
-- CDN versions (pinned in the table above)
-- CSS custom property names in `:root`
-- Relative paths in project card `href` attributes
-- The single-file architecture (`index.html` only)
+- The single-file architecture (`index.html` only).
+- CDN versions.
+- The single-accent (coral) discipline — no extra accent colours.
+- Relative `href`s to the live tools.
+- The "no invented metrics" rule for project copy.

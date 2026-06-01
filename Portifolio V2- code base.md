@@ -24,19 +24,17 @@
   --cream-deep: #ffe9d4;   /* peachy tinted panels */
   --paper:      #ffffff;   /* cards */
 
-  --coral:      #EC6159;   /* THE bold accent — warm coral */
-  --coral-deep: #d8453d;   /* hover / pressed */
-  --coral-tint: rgba(236, 97, 89, 0.12);
-  --coral-line: rgba(236, 97, 89, 0.32);
+  --coral:      #ff6a45;   /* THE bold accent — bright & happy */
+  --coral-deep: #ed4d28;   /* hover / pressed */
+  --coral-tint: rgba(255, 106, 69, 0.12);
+  --coral-line: rgba(255, 106, 69, 0.32);
 
-  --teal:       #EB9E46;   /* warm amber-orange — secondary pop */
-  --teal-deep:  #d98a2e;   /* orange hover / gradients */
-  --teal-tint:  rgba(235, 158, 70, 0.12);
+  --teal:       #14b8a6;   /* fresh mint-teal — cheerful cool pop */
+  --teal-deep:  #0e9787;   /* teal hover / gradients */
+  --teal-tint:  rgba(20, 184, 166, 0.12);
 
-  --pink:       #E9387A;   /* magenta — deepest warm accent */
-
-  --sun:        #F8CB4A;   /* sunny yellow — bright highlight */
-  --sun-deep:   #F2B446;
+  --sun:        #ffc24a;   /* sunny yellow — bright highlight */
+  --sun-deep:   #f5a623;
 
   --border:     rgba(28, 23, 20, 0.12);
   --border-soft:rgba(28, 23, 20, 0.07);
@@ -109,7 +107,7 @@ img { max-width: 100%; display: block; }
   padding: 0.95rem 1.6rem; border-radius: 11px; cursor: pointer;
   border: 1.5px solid transparent; transition: transform .16s, background .16s, color .16s, border-color .16s, box-shadow .16s;
 }
-.btn-primary { background: var(--coral); color: #fff; }
+.btn-primary { background: var(--coral); color: #fff; box-shadow: 0 10px 26px -10px var(--coral); }
 .btn-primary:hover { background: var(--coral-deep); transform: translateY(-2px); }
 .btn-dark { background: var(--teal); color: #fff; }
 .btn-dark:hover { background: var(--teal-deep); transform: translateY(-2px); }
@@ -129,8 +127,8 @@ img { max-width: 100%; display: block; }
   font-size: 0.8rem; font-weight: 600; color: var(--ink); margin-bottom: 1.6rem;
   box-shadow: var(--shadow-sm);
 }
-.pill .dot { width: 9px; height: 9px; border-radius: 50%; background: var(--teal); box-shadow: 0 0 0 0 rgba(235,158,70,.6); animation: pulse 2.2s infinite; }
-@keyframes pulse { 0%{box-shadow:0 0 0 0 rgba(235,158,70,.5)} 70%{box-shadow:0 0 0 9px rgba(235,158,70,0)} 100%{box-shadow:0 0 0 0 rgba(235,158,70,0)} }
+.pill .dot { width: 9px; height: 9px; border-radius: 50%; background: var(--teal); box-shadow: 0 0 0 0 rgba(15,110,99,.6); animation: pulse 2.2s infinite; }
+@keyframes pulse { 0%{box-shadow:0 0 0 0 rgba(15,110,99,.5)} 70%{box-shadow:0 0 0 9px rgba(15,110,99,0)} 100%{box-shadow:0 0 0 0 rgba(15,110,99,0)} }
 
 .hero h1 {
   font-family: var(--display); font-weight: 700;
@@ -201,7 +199,7 @@ img { max-width: 100%; display: block; }
 .chip i { color: var(--coral); }
 .about-traits { display: grid; gap: 1rem; }
 .trait { display: flex; gap: 1rem; padding: 1.3rem 1.4rem; background: var(--paper); border: 1px solid var(--border); border-radius: 16px; box-shadow: var(--shadow-sm); }
-.trait-ic { flex: 0 0 auto; width: 44px; height: 44px; border-radius: 12px; background: var(--teal-tint); color: var(--teal-deep); display: grid; place-items: center; font-size: 1.1rem; }
+.trait-ic { flex: 0 0 auto; width: 44px; height: 44px; border-radius: 12px; background: var(--coral-tint); color: var(--coral-deep); display: grid; place-items: center; font-size: 1.1rem; }
 .trait h4 { font-family: var(--display); font-size: 1.02rem; color: var(--ink); margin-bottom: 0.2rem; }
 .trait p { font-size: 0.9rem; color: var(--ink-mute); }
 
@@ -236,18 +234,15 @@ img { max-width: 100%; display: block; }
 .case[open] .case-toggle .lbl::after { content: " case study"; }
 .case-toggle .lbl::after { content: " case study"; }
 
-/* bright coral banner — applied to every case card */
-.case { border-color: var(--coral-line); }
-.case > summary { background: linear-gradient(120deg, var(--coral) 0%, var(--sun-deep) 130%); }
-.case .case-num { color: #fff; }
-.case .case-head h3 { color: #fff; }
-.case .case-head p { color: rgba(255,255,255,.9); }
-.case .case-tag { background: rgba(255,255,255,.22); color: #fff; }
-.case .case-toggle { color: #fff; border-color: rgba(255,255,255,.55); }
-.case:hover .case-toggle { border-color: #fff; color: var(--coral-deep); background: #fff; }
-
-/* featured (KPI) — bigger heading + flag */
-.case.featured .case-head h3 { font-size: 1.6rem; }
+/* featured (KPI) — bigger, bright coral banner */
+.case.featured { border-color: var(--coral-line); }
+.case.featured > summary { background: linear-gradient(120deg, var(--coral) 0%, var(--sun-deep) 130%); grid-template-columns: auto 1fr auto; }
+.case.featured .case-num { color: #fff; }
+.case.featured .case-head h3 { color: #fff; font-size: 1.6rem; }
+.case.featured .case-head p { color: rgba(255,255,255,.9); }
+.case.featured .case-tag { background: rgba(255,255,255,.22); color: #fff; }
+.case.featured .case-toggle { color: #fff; border-color: rgba(255,255,255,.55); }
+.case.featured:hover .case-toggle { border-color: #fff; color: var(--coral-deep); background: #fff; }
 .featured-flag { display: inline-flex; align-items: center; gap: 0.4rem; font-size: 0.72rem; font-weight: 700; letter-spacing: 0.05em; text-transform: uppercase; color: #fff; margin-bottom: 0.5rem; }
 
 /* expanded body */
@@ -264,7 +259,7 @@ img { max-width: 100%; display: block; }
 /* ============================================================
    CONTACT
    ============================================================ */
-.contact { background: linear-gradient(135deg, var(--coral) 0%, var(--pink) 100%); color: #fff; }
+.contact { background: linear-gradient(135deg, var(--teal) 0%, var(--teal-deep) 100%); color: #fff; }
 .contact .section-head { max-width: none; text-align: center; margin: 0 auto 2.5rem; }
 .contact .eyebrow { color: #fff; justify-content: center; }
 .contact .eyebrow::before { background: #fff; }
@@ -287,7 +282,7 @@ img { max-width: 100%; display: block; }
 /* ============================================================
    FOOTER
    ============================================================ */
-.footer { background: #ffffff; color: var(--ink-mute); padding: 2rem 0; border-top: 1px solid var(--border-soft); font-size: 0.85rem; }
+.footer { background: var(--cream-deep); color: var(--ink-mute); padding: 2rem 0; border-top: 1px solid var(--border-soft); font-size: 0.85rem; }
 .footer-in { display: flex; justify-content: space-between; align-items: center; gap: 1rem; flex-wrap: wrap; }
 .footer b { color: var(--ink); font-family: var(--display); }
 .footer .live { color: var(--teal-deep); font-weight: 600; }
@@ -337,11 +332,11 @@ img { max-width: 100%; display: block; }
 <!-- ========== NAV ========== -->
 <nav class="nav">
   <div class="wrap nav-in">
-    <a href="#top" class="brand"><span class="brand-mark" style="background-color: rgb(237, 77, 40); color: rgba(255, 255, 255, 0.85)">LC</span> Leticia Cezar</a>
+    <a href="#top" class="brand"><span class="brand-mark">LC</span> Leticia Cezar</a>
     <div class="nav-links" id="navLinks">
-      <a href="#about" style="background-color: rgb(237, 77, 40); color: rgba(255, 255, 255, 0.85)">About</a>
-      <a href="#work" style="background-color: rgb(237, 77, 40); color: rgba(255, 255, 255, 0.85)">Work</a>
-      <a href="#contact" class="nav-cta" style="background-color: rgb(237, 77, 40)">Get in touch</a>
+      <a href="#about">About</a>
+      <a href="#work">Work</a>
+      <a href="#contact" class="nav-cta">Get in touch</a>
     </div>
     <button class="nav-toggle" id="navToggle" aria-label="Toggle menu"><i class="fa-solid fa-bars"></i></button>
   </div>
@@ -349,15 +344,15 @@ img { max-width: 100%; display: block; }
 
 <!-- ========== HERO ========== -->
 <header class="hero">
-  <div class="wrap hero-grid" style="color: rgb(52, 40, 31)">
+  <div class="wrap hero-grid">
     <div class="hero-copy">
       <span class="pill"><span class="dot"></span> Available for full-time roles</span>
       <h1>I build internal tools that make work <span class="mark">easier</span>.</h1>
-      <p class="hero-sub">Operations &amp; process improvement. I spot the friction, figure out what's missing, and build something that removes it.</p>
-      <p class="hero-pos" style="font-weight: 600"><b>Operations + process improvement, often using AI to build internal tools</b> that cut admin and give teams clarity.</p>
+      <p class="hero-sub">Operations &amp; process improvement — I spot the friction, figure out what's missing, and build something that removes it.</p>
+      <p class="hero-pos"><b>Operations + process improvement, often using AI to build internal tools</b> that cut admin and give teams clarity.</p>
       <div class="hero-ctas">
         <a href="#contact" class="btn btn-primary"><i class="fa-solid fa-envelope"></i> Email me</a>
-        <a href="#work" class="btn btn-ghost" style="background:var(--teal);color:#fff;border-color:var(--teal)">See the work <i class="fa-solid fa-arrow-down"></i></a>
+        <a href="#work" class="btn btn-ghost">See the work <i class="fa-solid fa-arrow-down"></i></a>
       </div>
       <div class="hero-meta">
         <span><i class="fa-solid fa-location-dot"></i> London · Remote / Hybrid</span>
@@ -365,8 +360,8 @@ img { max-width: 100%; display: block; }
       </div>
     </div>
     <div class="hero-photo">
-      <div class="hero-photo-frame"><img src="assets/profile.jpeg?v=1" alt="Leticia Cezar"></div>
-      <div class="hero-badge-float" style="background-color: rgb(255, 233, 212)"><b>Self-taught</b><span style="color: rgb(52, 40, 31)">builder and lifelong learner</span></div>
+      <div class="hero-photo-frame"><img src="assets/profile.jpeg" alt="Leticia Cezar"></div>
+      <div class="hero-badge-float"><b>Self-taught</b><span>builder &amp; lifelong learner</span></div>
     </div>
   </div>
 </header>
@@ -374,14 +369,14 @@ img { max-width: 100%; display: block; }
 <main>
 
 <!-- ========== ABOUT ========== -->
-<section id="about" class="section about" style="background-color: rgba(255, 255, 255, 0.85)">
+<section id="about" class="section about">
   <div class="wrap">
     <div class="about-grid">
       <div class="about-bio reveal">
         <span class="eyebrow">About</span>
-        <p class="about-lead">Hi! I'm Leticia, I make work better for the people doing it, and for the company they do it for.</p>
-        <p style="font-weight: 400">My work sits in the operational layer that keeps research, support, and delivery connected. I'm <b>self-taught</b>, I love to learn, and I'm happiest when I've turned a messy manual process into something that just works.</p>
-        <p style="font-weight: 400">That looks like mapping how work actually happens, spotting the gaps, and building the tool that closes them, internal apps, process maps, infographics, and AI-powered workflows that fit the way a team really works.</p>
+        <p class="about-lead">I'm Leticia — I make work better for the people doing it, and for the company they do it for.</p>
+        <p>My work sits in the operational layer that keeps research, support, and delivery connected. I'm <b>self-taught</b>, I love to learn, and I'm happiest when I've turned a messy manual process into something that just works.</p>
+        <p>That looks like mapping how work actually happens, spotting the gaps, and building the tool that closes them — internal apps, process maps, infographics, and AI-powered workflows that fit the way a team really works.</p>
         <div class="about-chips">
           <span class="chip"><i class="fa-solid fa-chart-line"></i> Data &amp; Analysis</span>
           <span class="chip"><i class="fa-solid fa-screwdriver-wrench"></i> Internal Tools</span>
@@ -403,8 +398,8 @@ img { max-width: 100%; display: block; }
   <div class="wrap">
     <div class="section-head reveal">
       <span class="eyebrow">Selected work</span>
-      <h2>Tools I've built and shipped.</h2>
-      <p>Internal products built to solve real, day-to-day operational problems. Open any one to see the thinking,  the friction, what I built, and what changed.</p>
+      <h2>Tools I've built &amp; shipped.</h2>
+      <p>Internal products built to solve real, day-to-day operational problems. Open any one to see the thinking — the friction, what I built, and what changed.</p>
     </div>
 
     <div class="cases">
@@ -429,7 +424,7 @@ img { max-width: 100%; display: block; }
               <div class="story-block"><h5>What changed</h5><p>Leaders lost the manual admin, and employees got daily, easy-to-understand feedback they could act on themselves. The thinking and the build were both mine — the metric design is what makes the score actually mean something.</p></div>
               <div class="case-actions"><a class="btn btn-dark" href="../9- KPI Performance/index.html" target="_blank" rel="noopener">Open the tool <i class="fa-solid fa-arrow-up-right-from-square"></i></a></div>
             </div>
-            <div class="case-shot"><img src="assets/performance-calc-allocations.png?v=1" alt="KPI Performance Calculator — allocation groups with metric targets"></div>
+            <div class="case-shot"><img src="assets/performance-calc-allocations.png" alt="KPI Performance Calculator — allocation groups with metric targets"></div>
           </div>
         </div>
       </details>
@@ -453,7 +448,7 @@ img { max-width: 100%; display: block; }
               <div class="story-block"><h5>What changed</h5><p>Every handover now follows the same structure and produces the same shape of note — less missed, less re-explaining.</p></div>
               <div class="case-actions"><a class="btn btn-dark" href="../13- Line Test Support/index.html" target="_blank" rel="noopener">Open the tool <i class="fa-solid fa-arrow-up-right-from-square"></i></a></div>
             </div>
-            <div class="case-shot"><img src="assets/line-test-checklist.png?v=1" alt="Line Test Checklist tool — Screenwise PSE Support"></div>
+            <div class="case-shot"><img src="assets/line-test-checklist.png" alt="Line Test Checklist tool — Screenwise PSE Support"></div>
           </div>
         </div>
       </details>
@@ -477,7 +472,7 @@ img { max-width: 100%; display: block; }
               <div class="story-block"><h5>What changed</h5><p>Ops, Engineering, and Research could finally point at the same map — making drop-off points and ownership obvious.</p></div>
               <div class="case-actions"><a class="btn btn-dark" href="../7-onboarding-mapping/screenwise-onboarding-side-by-side.html" target="_blank" rel="noopener">Open the map <i class="fa-solid fa-arrow-up-right-from-square"></i></a></div>
             </div>
-            <div class="case-shot"><img src="assets/onboarding-map.png?v=1" alt="Onboarding flow map — participant journey from survey submission through compliance"></div>
+            <div class="case-shot"><img src="assets/onboarding-map.png" alt="Onboarding flow map — participant journey from survey submission through compliance"></div>
           </div>
         </div>
       </details>
@@ -500,7 +495,7 @@ img { max-width: 100%; display: block; }
               <div class="story-block"><h5>What I built</h5><p>Visual explainers — like the Screenwise Points Guide — that translate the rules into clear, shareable graphics.</p></div>
               <div class="story-block"><h5>What changed</h5><p>One image now does the job a paragraph couldn't, cutting the back-and-forth and making the rules easy to share.</p></div>
             </div>
-            <div class="case-shot"><img src="assets/screenwise-points-guide.png?v=1" alt="Screenwise Points Guide infographic — monthly points and bonus rewards"></div>
+            <div class="case-shot"><img src="assets/screenwise-points-guide.png" alt="Screenwise Points Guide infographic — monthly points and bonus rewards"></div>
           </div>
         </div>
       </details>
@@ -515,16 +510,20 @@ img { max-width: 100%; display: block; }
     <div class="section-head reveal">
       <span class="eyebrow">Contact</span>
       <h2>Let's make something work <span class="mark">better</span>.</h2>
-      <p>Looking for a full-time role where operations, tooling, and delivery actually matter. The fastest way to reach me is email, I reply the same day.</p>
+      <p>Looking for a full-time role where operations, tooling, and delivery actually matter. The fastest way to reach me is email — I reply the same day.</p>
     </div>
     <div class="contact-actions reveal">
-      <button type="button" class="btn btn-primary email-copy" id="emailCopy" data-email="leticiafcezar@gmail.com" aria-label="Copy email address" style="background-color: rgba(255, 255, 255, 0.85); color: rgb(216, 69, 61)">
+      <button type="button" class="btn btn-primary email-copy" id="emailCopy" data-email="leticiafcezar@gmail.com" aria-label="Copy email address">
         <i class="fa-solid fa-envelope ic ic--default"></i>
         <i class="fa-solid fa-copy ic ic--hover"></i>
         <i class="fa-solid fa-check ic ic--done"></i>
-        <span class="email-copy-label">Copy email</span>
+        <span class="email-copy-label">leticiafcezar@gmail.com</span>
       </button>
-      <a href="https://www.linkedin.com/in/leticiafcezar/" class="btn btn-ghost" style="color: rgba(255, 255, 255, 0.85); border-color: rgba(255,255,255,.28)" target="_blank" rel="noopener"><i class="fa-brands fa-linkedin-in"></i> LinkedIn</a>
+      <a href="https://www.linkedin.com/in/leticiafcezar/" class="btn btn-ghost" style="color:#fff;border-color:rgba(255,255,255,.28)" target="_blank" rel="noopener"><i class="fa-brands fa-linkedin-in"></i> LinkedIn</a>
+    </div>
+    <div class="contact-socials reveal">
+      <a class="soc" href="mailto:leticiafcezar@gmail.com" aria-label="Email"><i class="fa-solid fa-envelope"></i></a>
+      <a class="soc" href="https://www.linkedin.com/in/leticiafcezar/" target="_blank" rel="noopener" aria-label="LinkedIn"><i class="fa-brands fa-linkedin-in"></i></a>
     </div>
   </div>
 </section>
